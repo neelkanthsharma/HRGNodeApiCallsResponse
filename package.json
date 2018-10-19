@@ -2,10 +2,9 @@
     "name": "node-mongo-registration-login-forget-reset-api",
     "version": "1.0.0",
     "description": "NodeJS + MongoDB API for LOGIN, Registration, FORGET AND RESET PASSWORD",
-    "license":,
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/neelkanthsharma/HRGNodeApiCallsResponse.git"
     },
     "scripts": {
         "start": "nodemon ./server.js"

@@ -38,14 +38,14 @@ async function create(req) {
    
 }
 async function reset(req) {  
-    if (! await User.findOne({ email: req.body.email })) {
-        throw `Email  ${req.body.email} isn't Registerd with us `;
+    if (! await User.findOne({ email: req.params.email })) {
+        throw `Email  ${req.params.email} isn't Registerd with us `;
     } else {
         if(req.body.newPassword === req.body.retypeNewPassword){
             let passwordUpdate = {
                 $set: {password : req.body.newPassword, hash: bcrypt.hashSync(req.body.newPassword, 10)},
             }
-            await User.findOneAndUpdate({email: req.body.email}, passwordUpdate);
+            await User.findOneAndUpdate({email: req.params.email}, passwordUpdate);
 
         } else {
             throw "password not matched";
@@ -54,11 +54,11 @@ async function reset(req) {
 }
 
 async function forget(req, res){
-    const user =  await User.findOne({email:req.body.email});
+    const user =  await User.findOne({email:req.params.email});
     if (user) {
-        var resetlink = `http://localhost:4000/users/reset`;
-        reset(req);
-        return  res.send({resetlink});
+        var resetlink = `http://localhost:4000/users/reset/`+ req.params.email;
+      var htmllink = `<h2> Click on the link to reset your password ${resetlink} </h2>`;
+        return  res.send({htmllink});
     }
     else {
         throw `Email  ${req.body.email} isn't Registerd with us `;

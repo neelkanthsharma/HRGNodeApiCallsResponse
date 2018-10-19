@@ -5,8 +5,8 @@ const userService = require('./user.service');
 // routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
-router.post('/reset', reset);
-router.post('/forget', forget);
+router.post('/reset/:email', reset);
+router.post('/forget/:email', forget);
 
 module.exports = router;
 function authenticate(req, res, next) {
